@@ -1,0 +1,35 @@
+﻿SOCKETROOM — CÁCH CHẠY LINK PUBLIC SAU KHI SỬA LỖI 1033
+
+1. Mở start_public.bat trong thư mục SocketRoom.
+2. Đợi thông báo LINK PHÒNG CHAT. DNS của link mới đôi khi cần vài phút để cập nhật. Chương trình sẽ kiểm tra link HTTPS trước khi báo sẵn sàng.
+3. Mở public_link.txt trong cùng thư mục và sao chép link gửi cho người tham gia.
+4. Sau khi link đã sẵn sàng, bạn có thể đóng cửa sổ thông báo. SocketRoom và tunnel tiếp tục chạy nền.
+5. Giữ máy chủ bật, có Internet và không Sleep.
+6. Muốn dừng, mở stop_public.bat trong đúng thư mục SocketRoom.
+7. Lần chạy lại sẽ tạo link mới; hãy gửi link mới cho người khác.
+
+Nếu bấm start_public.bat lần nữa khi phiên cùng thư mục đang chạy tốt, chương trình dùng lại link hiện tại thay vì mở phiên thứ hai.
+
+Lỗi 1033 nghĩa là Cloudflare không tìm thấy tunnel đang kết nối tới link đó. Link của phiên đã dừng không dùng tiếp được. Không dùng lại link trong tin nhắn cũ sau khi chạy lại.
+
+Nếu báo lỗi khi khởi động, xem:
+- logs/launcher.log
+- logs/launcher_error.log
+- logs/tunnel.log
+
+Nếu cổng đang được một bản SocketRoom từ thư mục khác dùng, hãy dừng bản đó bằng stop_public.bat ở đúng thư mục, rồi chạy bản cần dùng.
+
+Bộ sửa này gồm:
+- start_public.bat
+- start_public_background.ps1
+- socketroom_process.ps1
+- start_public.py
+- stop_public.ps1
+
+Cách áp dụng bộ sửa trên máy khác:
+Dừng SocketRoom, giải nén bộ sửa rồi chép các file trên vào thư mục chương trình, thay các file cùng tên. Giữ nguyên socketroom.db, admin_secret.txt và thư mục tools. Sau đó mở start_public.bat.
+
+Bộ sửa không chứa cơ sở dữ liệu hoặc mã quản trị. Không bật tự chạy cùng Windows tự động; bạn vẫn mở start_public.bat thủ công mỗi lần cần sử dụng.
+
+Thông tin chính thức về lỗi 1033:
+https://developers.cloudflare.com/cloudflare-one/troubleshooting/tunnel/
